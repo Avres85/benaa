@@ -13,10 +13,30 @@ const ibmPlexSans = IBM_Plex_Sans({
   weight: ["500", "600", "700"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.benaa.co";
+const fallbackSiteUrl = "https://www.benaaconstruction.org";
+
+function resolveMetadataBase(rawSiteUrl: string | undefined) {
+  const normalized = rawSiteUrl?.trim();
+
+  if (!normalized) {
+    return new URL(fallbackSiteUrl);
+  }
+
+  try {
+    return new URL(normalized);
+  } catch {
+    try {
+      return new URL(`https://${normalized}`);
+    } catch {
+      return new URL(fallbackSiteUrl);
+    }
+  }
+}
+
+const metadataBase = resolveMetadataBase(process.env.NEXT_PUBLIC_SITE_URL);
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase,
   title: "BENAA | The Procurement OS for Modular Construction",
   description:
     "BENAA helps developers, contractors, and modular factories discover, vet, compare, and engage through a structured procurement workflow.",

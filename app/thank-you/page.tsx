@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 const calLink = process.env.NEXT_PUBLIC_CAL_LINK ?? "https://cal.com";
+
+export const metadata: Metadata = {
+  title: "Thank You | BENAA",
+  description: "Thank you for joining the BENAA waitlist.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function ThankYouPage() {
   return (

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Inter } from "next/font/google";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,33 +14,20 @@ const ibmPlexSans = IBM_Plex_Sans({
   weight: ["500", "600", "700"],
 });
 
-const fallbackSiteUrl = "https://www.benaaconstruction.org";
-
-function resolveMetadataBase(rawSiteUrl: string | undefined) {
-  const normalized = rawSiteUrl?.trim();
-
-  if (!normalized) {
-    return new URL(fallbackSiteUrl);
-  }
-
-  try {
-    return new URL(normalized);
-  } catch {
-    try {
-      return new URL(`https://${normalized}`);
-    } catch {
-      return new URL(fallbackSiteUrl);
-    }
-  }
-}
-
-const metadataBase = resolveMetadataBase(process.env.NEXT_PUBLIC_SITE_URL);
+const metadataBase = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase,
+  alternates: {
+    canonical: "/",
+  },
   title: "BENAA | The Procurement OS for Modular Construction",
   description:
     "BENAA helps developers, contractors, and modular factories discover, vet, compare, and engage through a structured procurement workflow.",
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: "BENAA | Procurement OS for Modular Construction",
     description:
@@ -47,12 +35,14 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "BENAA",
     type: "website",
+    images: ["/Benaalogo_0A1638_upscaled_4x.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "BENAA | Procurement OS for Modular Construction",
     description:
       "Join the BENAA waitlist for structured, data-driven modular procurement.",
+    images: ["/Benaalogo_0A1638_upscaled_4x.png"],
   },
 };
 

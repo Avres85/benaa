@@ -2,8 +2,28 @@ import Image from "next/image";
 import { WaitlistProvider } from "@/components/waitlist-context";
 import { WaitlistButton } from "@/components/waitlist-button";
 import { WaitlistModal } from "@/components/waitlist-modal";
+import { getSiteUrl } from "@/lib/site-url";
 
 const calLink = process.env.NEXT_PUBLIC_CAL_LINK ?? "https://cal.com";
+const siteUrl = getSiteUrl();
+const canonicalUrl = siteUrl.toString();
+const siteOrigin = siteUrl.origin;
+
+const organizationStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "BENAA",
+  url: canonicalUrl,
+  logo: `${siteOrigin}/Benaalogo_0A1638_upscaled_4x.png`,
+  sameAs: [canonicalUrl],
+};
+
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "BENAA",
+  url: canonicalUrl,
+};
 
 const problemCards = [
   {
@@ -78,6 +98,18 @@ export default function Home() {
           </header>
 
           <main id="top">
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(organizationStructuredData),
+              }}
+            />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(websiteStructuredData),
+              }}
+            />
             <section className="section-rule border-b border-benaa-rule px-5 py-14 sm:px-7 sm:py-20">
               <div className="max-w-3xl">
                 <p className="font-heading text-xs tracking-[0.2em] text-benaa-muted uppercase">

@@ -3,6 +3,7 @@ import { WaitlistProvider } from "@/components/waitlist-context";
 import { WaitlistButton } from "@/components/waitlist-button";
 import { WaitlistModal } from "@/components/waitlist-modal";
 import { getSiteUrl } from "@/lib/site-url";
+import logo from "@/public/Benaalogo_0A1638_upscaled_4x.png";
 
 const calLink = process.env.NEXT_PUBLIC_CAL_LINK ?? "https://cal.com";
 const siteUrl = getSiteUrl();
@@ -75,11 +76,10 @@ export default function Home() {
             <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-center px-5 sm:h-20 sm:justify-between sm:px-7 lg:h-36">
               <a href="#top" className="block">
                 <Image
-                  src="/Benaalogo_0A1638_upscaled_4x.png"
+                  src={logo}
                   alt="BENAA"
-                  width={440}
-                  height={112}
                   priority
+                  sizes="(min-width: 1024px) 408px, (min-width: 640px) 192px, 128px"
                   className="h-8 w-auto origin-left scale-[4] -translate-x-[4.25rem] translate-y-3 sm:h-10 sm:scale-100 sm:translate-x-0 sm:translate-y-0 md:h-12 lg:h-32 lg:scale-200 lg:translate-y-6"
                 />
               </a>
@@ -183,10 +183,9 @@ export default function Home() {
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <Image
-                  src="/Benaalogo_0A1638_upscaled_4x.png"
+                  src={logo}
                   alt="BENAA"
-                  width={440}
-                  height={112}
+                  sizes="256px"
                   className="h-14 w-auto sm:h-16"
                 />
                 <p className="mt-1 text-sm text-benaa-muted">
